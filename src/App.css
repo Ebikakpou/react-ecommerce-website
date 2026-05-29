@@ -22,7 +22,7 @@ body {
 }
 
 .navbar {
-  background-color: #fff;
+  background-color: #83a7f0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem 0;
   position: sticky;
@@ -132,7 +132,7 @@ body {
 }
 
 .product-card {
-  background: #fff;
+  background: #665e5e;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -176,7 +176,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
-  background: #fff;
+  background: #ffffff;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -191,7 +191,7 @@ body {
 .product-detail-name {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #333;
+  color: #ffffff;
 }
 
 .product-detail-price {
@@ -526,4 +526,11 @@ body {
   .checkout-item-controls {
     align-items: flex-start;
   }
+}
+
+.auth-prompt-text {
+  font-size: 1.1rem;
+  color: red;
+  margin-top: 1rem;
+  text-align: center;
 }

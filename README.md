@@ -1,16 +1,107 @@
-# React + Vite
+# React E-Commerce Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+A modern e-commerce web application built with React and Vite. The project demonstrates frontend development concepts as well as DevOps practices such as containerization and Continuous Integration.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+* Product Listing
+* Product Details Page
+* Shopping Cart Functionality
+* Checkout Page
+* React Context API State Management
+* Responsive UI
+* Docker Containerization
+* GitHub Actions CI Pipeline
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+### Frontend
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* React
+* React Router
+* Context API
+* Vite
+
+### DevOps
+
+* Git
+* GitHub
+* GitHub Actions
+* Docker
+* Nginx
+
+## Project Structure
+
+```text
+src/
+├── components/
+├── context/
+├── pages/
+├── data/
+├── App.jsx
+└── main.jsx
+```
+
+## Local Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start development server:
+
+```bash
+npm run dev
+```
+
+## Build Application
+
+```bash
+npm run build
+```
+
+## Docker Usage
+
+Build image:
+
+```bash
+docker build -t ecommerce-react .
+```
+
+Run container:
+
+```bash
+docker run -p 8080:80 ecommerce-react
+```
+
+Application available at:
+
+```text
+http://localhost:8080
+```
+
+## Continuous Integration
+
+GitHub Actions automatically:
+
+* Installs dependencies
+* Runs ESLint checks
+* Builds the React application
+* Builds the Docker image
+
+on every push to the main branch.
+
+## Learning Objectives
+
+This project demonstrates:
+
+* Modern React development
+* State management using Context API
+* Component-based architecture
+* Docker containerization
+* CI/CD using GitHub Actions
+* DevOps automation workflows

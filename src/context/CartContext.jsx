@@ -7,54 +7,75 @@ export default function CartProvider({ children }) {
     const [cartItems, setCartItems] = useState([]);
 
     function addToCart(productId) {
-        const existing = cartItems.find(
-            item => item.id === productId
-        );
-
-        if (existing) {
-            const currentQuantity = existing.quantity;
-            const updatedCartItems = cartItems.map(item =>
-                item.id === productId
-                    ? { ...item, quantity: currentQuantity + 1 }
-                    : item
+        setCartItems((prevItems) => {
+            const existing = prevItems.find(
+                (item) => item.id === productId
             );
-            setCartItems(updatedCartItems);
-        } else {
-            setCartItems([
-                ...cartItems,
-                { id: productId, quantity: 1 }
-            ]);
-        }
-    } 
 
-    function getCartItemsWithProducts(){
-        return cartItems.map(cartItem => ({
-            ...cartItem, product: getProductById(cartItem.id)
-        })).filter(item => item.product);
+            if (existing) {
+                return prevItems.map((item) =>
+                    item.id === productId
+                        ? {
+                              ...item,
+                              quantity: item.quantity + 1,
+                          }
+                        : item
+                );
+            }
+
+            return [
+                ...prevItems,
+                {
+                    id: productId,
+                    quantity: 1,
+                },
+            ];
+        });
+    }
+
+    function getCartItemsWithProducts() {
+        return cartItems
+            .map((cartItem) => ({
+                ...cartItem,
+                product: getProductById(cartItem.id),
+            }))
+            .filter((item) => item.product);
     }
 
     function removeFromCart(productId) {
-        setCartItems(cartItems.filter(item => item.id !== productId));
+        setCartItems((prevItems) =>
+            prevItems.filter(
+                (item) => item.id !== productId
+            )
+        );
     }
 
-    function updateQuantity(productid, quantity) { 
-
+    function updateQuantity(productId, quantity) {
         if (quantity <= 0) {
-            removeFromCart(productid);
+            removeFromCart(productId);
             return;
         }
-        setCartItems (cartItems.map(item =>
-            item.id === productid ? { ...item, quantity } : item
-        )); 
+
+        setCartItems((prevItems) =>
+            prevItems.map((item) =>
+                item.id === productId
+                    ? { ...item, quantity }
+                    : item
+            )
+        );
     }
 
     function getCartTotal() {
-        const total = cartItems.reduce((total, item) => {
+        return cartItems.reduce((total, item) => {
             const product = getProductById(item.id);
-            return total + (product ? product.price * item.quantity : 0);
-        }, 0);
 
-        return total;
+            return (
+                total +
+                (product
+                    ? product.price * item.quantity
+                    : 0)
+            );
+        }, 0);
     }
 
     function clearCart() {
@@ -62,16 +83,32 @@ export default function CartProvider({ children }) {
     }
 
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, 
-        getCartItemsWithProducts, updateQuantity, removeFromCart, getCartTotal, clearCart }}>
+        <CartContext.Provider
+            value={{
+                cartItems,
+                addToCart,
+                getCartItemsWithProducts,
+                removeFromCart,
+                updateQuantity,
+                getCartTotal,
+                clearCart,
+            }}
+        >
             {children}
         </CartContext.Provider>
     );
 }
 
-export function useCart() {
-
+function useCart() {
     const context = useContext(CartContext);
+
+    if (!context) {
+        throw new Error(
+            "useCart must be used within a CartProvider"
+        );
+    }
 
     return context;
 }
+
+export { useCart };
